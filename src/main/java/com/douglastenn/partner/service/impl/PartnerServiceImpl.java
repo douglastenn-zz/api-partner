@@ -54,20 +54,19 @@ public class PartnerServiceImpl implements PartnerService {
     }
 
     private List<PartnerTeam> saveAssociateCampaigns(Partner partner) {
-        List<PartnerTeam> listPartnerTeam = new ArrayList();
-
-        for(Campaign campaign : this.getCampaignsByPartnerTeamId(partner.teamId)) {
-            PartnerTeam currentCampaign = this.partnerTeamRepository
-                    .findByCampaignIdEqualsAndPartnerIdEquals(campaign.id, partner.id);
-            PartnerTeam partnerTeam = (currentCampaign != null) ? currentCampaign : new PartnerTeam();
-            partnerTeam.setCampaignId(campaign.id);
-            partnerTeam.setPartnerId(partner.id);
-            partnerTeam.setTeamId(partner.teamId);
-
-            listPartnerTeam.add(partnerTeam);
-            this.partnerTeamRepository.save(partnerTeam);
-        }
-        return listPartnerTeam;
+        return this.getCampaignsByPartnerTeamId(partner.teamId)
+                .stream()
+                .map(campaign -> {
+                    PartnerTeam currentCampaign = this.partnerTeamRepository
+                            .findByCampaignIdEqualsAndPartnerIdEquals(campaign.id, partner.id);
+                    PartnerTeam partnerTeam = (currentCampaign != null) ? currentCampaign : new PartnerTeam();
+                    partnerTeam.setCampaignId(campaign.id);
+                    partnerTeam.setPartnerId(partner.id);
+                    partnerTeam.setTeamId(partner.teamId);
+                    return partnerTeam;
+                })
+                .peek(partnerTeam -> partnerTeamRepository.save(partnerTeam))
+                .collect(toList());
     }
 
     private List<Campaign> getCampaignsByPartnerTeamId(Long teamId) {

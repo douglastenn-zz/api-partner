@@ -25,6 +25,25 @@ public class Partner {
 
     public Long teamId;
 
+    public Partner() {
+        // nothing
+    }
+
+    public Partner(String id, String name, String email, LocalDate birthDate, Long teamId) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.birthDate = birthDate;
+        this.teamId = teamId;
+    }
+
+    public Partner(String name, String email, LocalDate birthDate, Long teamId) {
+        this.name = name;
+        this.email = email;
+        this.birthDate = birthDate;
+        this.teamId = teamId;
+    }
+
     public String getId() {
         return id;
     }

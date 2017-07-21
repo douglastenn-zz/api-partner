@@ -26,6 +26,12 @@ public class PartnerTeam {
         this.campaignId = campaignId;
     }
 
+    public PartnerTeam(String partnerId, Long teamId, String campaignId) {
+        this.partnerId = partnerId;
+        this.teamId = teamId;
+        this.campaignId = campaignId;
+    }
+
     public String getId() {
         return id;
     }
