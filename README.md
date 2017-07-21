@@ -7,8 +7,6 @@ A simple REST API to handle partners and associate with campaigns
 
 ## Dependencies 
 
-- Docker
-- Docker Compose
 - Spring Boot
 - Spring Data
 - MongoDB
