@@ -112,7 +112,7 @@ Result:
 
 To get a list of associated campaigns, you must run as shown below:
 
-**GET:** /api/partner/:campaignId
+**GET:** /api/partner/associate/:campaignId
 
 Examples:
 
